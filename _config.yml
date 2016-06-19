@@ -68,7 +68,9 @@ theme: landscape
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  type:
+  type: git
+  repo: git@github.com:lukmy/lukmy.github.io.git
+  branch: master
 
 # Org
 # Docs: https://github.com/CodeFalling/hexo-renderer-org

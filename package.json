@@ -18,6 +18,8 @@
 
         "hexo-renderer-jade": "latest",
         "hexo-renderer-sass": "latest",
-        "hexo-renderer-org": "latest"
+        "hexo-renderer-org": "latest",
+
+        "hexo-deployer-git": "latest"
     }
 }
