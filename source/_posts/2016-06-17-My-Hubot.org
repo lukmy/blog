@@ -1,0 +1,69 @@
+#+TITLE: Hubot 初步研究
+#+DATE: <2016-06-17 Fri 11:00>
+#+TAGS: hubot
+#+LAYOUT: post
+#+CATEGORIES: DevOPS
+#+NOC: false
+
+* 初衷
+
+- [[https://github.com/NARKOZ/hacker-scripts][俄罗斯程序员的自动化生活]]
+- [[https://www.pagerduty.com/blog/what-is-chatops/][ChatOps 的兴起]]
+- Case 的实际需要
+  - Case 是一个涉及到日常发布运维及 TS 的项目，受众对象不仅包含 OPS，还有对技术不是太熟悉的 TS，开放 API 来调用不太现实，故开始考虑运维机器人。
+  - 另外 Case 涉及到的操作大部分都是异步的，普遍流程为 =创建任务-›开始任务-›轮询至任务结束=，在自己日常调用及调试的情况下有点麻烦
+
+* 为什么用 Hubot
+
+- GitHub 自用工具，维护比较有保证
+- [[https://github.com/github/hubot/blob/master/docs/adapters.md][Adapter 比较多]]
+- CoffeeScript 门槛较低
+  - CoffeeScript 语法较标准 JavaScript 清晰了很多，通过一些限制避免了很多 JavaScript 的坑。
+  - 另外，CoffeeScript 的语法和 Ruby 很像，写过 Ruby 的程序员迁移成本较低。
+- 实现比较简单，实在不行的话可以看源码
+
+* 搭建过程及参考材料
+** 如何搭建 Hubot
+
+- Hubot 官方文档
+  - [[https://hubot.github.com/docs/][Hubot/Overview]]
+  - [[https://hubot.github.com/docs/scripting/][Hubot/Scripting]] 
+- 比较有用的插件
+  - [[https://github.com/vinta/hubot-reload-scripts][Reload scripts without restarting Hubot]]
+- 学习 CoffeeScript
+  - [[http://coffeescript.org/][CoffeeScript 官网]]
+  - [[http://amdgigabyte.github.io/library/coffeescript/index.html][CoffeeScript 袖珍手册]]
+  - [[http://coffeescript-cookbook.github.io/][CoffeeScript Cookbook]]
+
+** 支持『非阻塞同步』
+
+- [[http://es6.ruanyifeng.com/#docs/async][阮一峰的分享: 异步操作和 Async 函数]]
+- [[https://www.zhihu.com/question/25413141][一个很有用的知乎回答]]
+- [[https://www.zhihu.com/question/25413141/answer/71934118#][如何在 coffee 里实现非阻塞同步]]
+  - CoffeeScript 写的非常简洁，好感度+1
+  - 但是，熟练这个用法必须吃通 Promise 和 co，建议从 [[http://es6.ruanyifeng.com/#docs/async][阮一峰的分享]] 开始
+
+** 如何在 Hubot 里使用 ES6
+
+Problems
+
+1. CoffeeScript 默认不开启 ES6
+2. Hubot 使用的 CoffeeScript 版本比较老，不支持 ES6 特性
+
+Solutions
+
+1. coffee --nodejs --harmony /file/
+2. 两步
+   1. 升级 Hubot 依赖的 CoffeeScript, 最新版即可
+   2. 修改 =./bin/hubot=, 添加 =--harmony= flag
+      
+** Case Bot 的历程
+
+* TODO TODOs 和最近的兴趣点
+
+- 完善功能
+- 还是想写一套有引导，有预置选项的前端页面给人用，最小化用户的学习成本
+
+* 一些有意思的资料
+
+- [[https://twitter.com/brandonmartinez/status/301453485407342592][How to pronouce Hubot?]]
